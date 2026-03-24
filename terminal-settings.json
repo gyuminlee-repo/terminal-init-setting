@@ -1,0 +1,136 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": 
+    [
+        {
+            "command": 
+            {
+                "action": "newTab",
+                "profile": "Windows PowerShell"
+            },
+            "id": "User.newTab.C5CF5A05"
+        }
+    ],
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{dc94aec9-8ec1-50ad-8dd6-142ee277d8f6}",
+    "firstWindowPreference": "persistedWindowLayout",
+    "keybindings":
+    [
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+shift+c"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+shift+v"
+        },
+        {
+            "id": "Terminal.ToggleFullscreen",
+            "keys": "alt+enter"
+        },
+        {
+            "id": "User.newTab.C5CF5A05",
+            "keys": "alt+p"
+        }
+    ],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults":
+        {
+            "colorScheme": "WezTerm",
+            "font":
+            {
+                "face": "JetBrainsMono Nerd Font",
+                "size": 11
+            },
+            "opacity": 90,
+            "useAcrylic": true
+        },
+        "list": 
+        [
+            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{dc94aec9-8ec1-50ad-8dd6-142ee277d8f6}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Microsoft.WSL"
+            },
+            {
+                "guid": "{ad8f5499-8e96-50d1-9b40-1808e50011b3}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 18",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{beb713a0-1ea6-5e51-a3b1-5c0d748a10fa}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 18",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{7bfb1782-3526-515c-b942-0f3c032bbf6c}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{e3680a09-07ef-5c81-86fb-9887a531ddfd}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            }
+        ]
+    },
+    "schemes":
+    [
+        {
+            "name": "WezTerm",
+            "background": "#000000",
+            "foreground": "#CCCCCC",
+            "cursorColor": "#53AE71",
+            "selectionBackground": "#264F78",
+            "black": "#000000",
+            "red": "#CC5555",
+            "green": "#55CC55",
+            "yellow": "#CDCD55",
+            "blue": "#5555CC",
+            "purple": "#CC55CC",
+            "cyan": "#7ACACA",
+            "white": "#CCCCCC",
+            "brightBlack": "#555555",
+            "brightRed": "#FF5555",
+            "brightGreen": "#55FF55",
+            "brightYellow": "#FFFF55",
+            "brightBlue": "#5555FF",
+            "brightPurple": "#FF55FF",
+            "brightCyan": "#55FFFF",
+            "brightWhite": "#FFFFFF"
+        }
+    ],
+    "themes": []
+}
