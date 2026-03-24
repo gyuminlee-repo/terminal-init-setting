@@ -33,6 +33,22 @@
         {
             "id": "User.newTab.C5CF5A05",
             "keys": "alt+p"
+        },
+        {
+            "command": null,
+            "keys": "alt+shift+up"
+        },
+        {
+            "command": null,
+            "keys": "alt+shift+down"
+        },
+        {
+            "command": null,
+            "keys": "alt+shift+left"
+        },
+        {
+            "command": null,
+            "keys": "alt+shift+right"
         }
     ],
     "newTabMenu": 
@@ -48,7 +64,6 @@
             "colorScheme": "WezTerm",
             "font":
             {
-                "face": "JetBrainsMono Nerd Font",
                 "size": 11
             },
             "opacity": 90,

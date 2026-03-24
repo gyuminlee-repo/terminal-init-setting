@@ -1,14 +1,14 @@
 # Terminal Init Setting
 
-Windows Terminal + tmux 설정 자동 적용 스크립트.
+Windows Terminal + WSL + tmux 자동 설정 스크립트.
 
-WSL Ubuntu 환경에서 WezTerm 스타일의 단축키와 세션 보존(tmux)을 Windows Terminal에 적용한다.
+WSL Ubuntu에서 터미널을 열면 자동으로 tmux 세션에 연결된다. WezTerm 스타일 단축키와 세션 보존을 지원한다.
 
 ## 적용 항목
 
 | 파일 | 설명 |
 |------|------|
-| `terminal-settings.json` | Windows Terminal 설정 (WezTerm 컬러 스킴, 폰트, Acrylic, 세션 복원) |
+| `terminal-settings.json` | Windows Terminal 설정 (WezTerm 컬러 스킴, Acrylic, 세션 복원) |
 | `tmux.conf` | tmux 설정 (WezTerm 스타일 Alt 단축키, 50000줄 스크롤백) |
 | `setup-terminal.sh` | 원클릭 셋업 스크립트 |
 
@@ -20,7 +20,9 @@ cd terminal-init-setting
 bash setup-terminal.sh
 ```
 
-설치 후 Windows Terminal을 재시작하면 적용된다.
+스크립트가 자동으로 설치하는 항목: tmux, zsh, oh-my-zsh, zsh 플러그인(autosuggestions, syntax-highlighting).
+
+설치 후 Windows Terminal을 완전히 종료하고 다시 열면 적용된다.
 
 ## 단축키
 
@@ -31,6 +33,7 @@ bash setup-terminal.sh
 | 수평 분할 (좌우) | `Alt+D` |
 | 수직 분할 (상하) | `Alt+Shift+D` |
 | 패인 닫기 | `Alt+W` |
+| 패인 줌 (전체화면 토글) | `Alt+Z` |
 | 패인 이동 | `Alt+방향키` |
 | 패인 크기 조절 | `Alt+Shift+방향키` |
 
@@ -110,5 +113,3 @@ WSL을 재부팅(`wsl --shutdown`)하면 tmux 서버도 종료된다. 이 경우
 
 - Windows Terminal (Microsoft Store)
 - WSL Ubuntu
-- tmux (스크립트가 자동 설치)
-- JetBrainsMono Nerd Font (선택 - 없으면 기본 폰트로 대체)
