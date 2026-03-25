@@ -97,6 +97,36 @@ cp "$SCRIPT_DIR/tmux.conf" "$HOME/.tmux.conf"
 ok "~/.tmux.conf 적용 완료"
 
 # --------------------------------------------------
+# 4-1. TPM + tmux 플러그인 설치 (세션 복원용)
+# --------------------------------------------------
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [ -d "$TPM_DIR" ]; then
+    ok "TPM 이미 설치됨"
+else
+    info "TPM(Tmux Plugin Manager) 설치 중..."
+    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+    ok "TPM 설치 완료"
+fi
+
+RESURRECT_DIR="$HOME/.tmux/plugins/tmux-resurrect"
+if [ -d "$RESURRECT_DIR" ]; then
+    ok "tmux-resurrect 이미 설치됨"
+else
+    info "tmux-resurrect 설치 중..."
+    git clone https://github.com/tmux-plugins/tmux-resurrect "$RESURRECT_DIR"
+    ok "tmux-resurrect 설치 완료"
+fi
+
+CONTINUUM_DIR="$HOME/.tmux/plugins/tmux-continuum"
+if [ -d "$CONTINUUM_DIR" ]; then
+    ok "tmux-continuum 이미 설치됨"
+else
+    info "tmux-continuum 설치 중..."
+    git clone https://github.com/tmux-plugins/tmux-continuum "$CONTINUUM_DIR"
+    ok "tmux-continuum 설치 완료 (15분마다 세션 자동 저장, 재시작 시 자동 복원)"
+fi
+
+# --------------------------------------------------
 # 5. 셸 RC 파일에 tmux 자동 연결 블록 추가
 # --------------------------------------------------
 TMUX_BLOCK='# === tmux 자동 연결 (터미널 열면 바로 tmux 세션으로) ===
@@ -125,7 +155,7 @@ else
 fi
 
 # --------------------------------------------------
-# 6. Windows Terminal settings.json 복사
+# 6. .wslconfig 복사 (VM 종료 방지 → tmux 세션 유지)
 # --------------------------------------------------
 # Windows 사용자 폴더 자동 탐지
 WIN_USER_DIR=""
@@ -137,6 +167,29 @@ for dir in /mnt/c/Users/*/; do
     fi
 done
 
+if [ -z "$WIN_USER_DIR" ]; then
+    warn "Windows 사용자 폴더를 찾을 수 없음 — .wslconfig 수동 복사 필요"
+else
+    WSLCONFIG_PATH="${WIN_USER_DIR}.wslconfig"
+    if [ -f "$WSLCONFIG_PATH" ]; then
+        if grep -q 'vmIdleTimeout' "$WSLCONFIG_PATH"; then
+            ok ".wslconfig vmIdleTimeout 이미 설정됨 — 스킵"
+        else
+            cp "$WSLCONFIG_PATH" "${WSLCONFIG_PATH}${BACKUP_SUFFIX}"
+            info "기존 .wslconfig 백업 → .wslconfig${BACKUP_SUFFIX}"
+            echo "" >> "$WSLCONFIG_PATH"
+            cat "$SCRIPT_DIR/wslconfig" >> "$WSLCONFIG_PATH"
+            ok ".wslconfig에 vmIdleTimeout=-1 추가 완료"
+        fi
+    else
+        cp "$SCRIPT_DIR/wslconfig" "$WSLCONFIG_PATH"
+        ok ".wslconfig 생성 완료 (vmIdleTimeout=-1)"
+    fi
+fi
+
+# --------------------------------------------------
+# 7. Windows Terminal settings.json 복사
+# --------------------------------------------------
 if [ -z "$WIN_USER_DIR" ]; then
     warn "Windows 사용자 폴더를 찾을 수 없음 — settings.json 수동 복사 필요"
     warn "복사 대상: scripts/dotfiles/terminal-settings.json"
@@ -184,5 +237,6 @@ echo "  Alt+Z          패인 줌 (전체화면 토글)"
 echo "  Alt+방향키     패인 이동"
 echo "  Alt+T          새 윈도우"
 echo "  Alt+[/]        윈도우 전환"
-echo "  Alt+P          PowerShell 탭"
+echo "  Ctrl+B Ctrl+S  세션 저장 (resurrect)"
+echo "  Ctrl+B Ctrl+R  세션 복원 (resurrect)"
 echo "  Ctrl+Shift+C/V 복사/붙여넣기"

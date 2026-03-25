@@ -9,7 +9,8 @@ WSL Ubuntu에서 터미널을 열면 자동으로 tmux 세션에 연결된다. W
 | 파일 | 설명 |
 |------|------|
 | `terminal-settings.json` | Windows Terminal 설정 (WezTerm 컬러 스킴, Acrylic, 세션 복원) |
-| `tmux.conf` | tmux 설정 (WezTerm 스타일 Alt 단축키, 50000줄 스크롤백) |
+| `tmux.conf` | tmux 설정 (WezTerm 스타일 Alt 단축키, 50000줄 스크롤백, resurrect/continuum 플러그인) |
+| `wslconfig` | WSL2 VM 종료 방지 (`vmIdleTimeout=-1`). 터미널 닫아도 tmux 세션 유지 |
 | `setup-terminal.sh` | 원클릭 셋업 스크립트 |
 
 ## 설치
@@ -20,7 +21,7 @@ cd terminal-init-setting
 bash setup-terminal.sh
 ```
 
-스크립트가 자동으로 설치하는 항목: tmux, zsh, oh-my-zsh, zsh 플러그인(autosuggestions, syntax-highlighting).
+스크립트가 자동으로 설치하는 항목: tmux, zsh, oh-my-zsh, zsh 플러그인(autosuggestions, syntax-highlighting), TPM(Tmux Plugin Manager), tmux-resurrect, tmux-continuum.
 
 설치 후 Windows Terminal을 완전히 종료하고 다시 열면 적용된다.
 
@@ -45,12 +46,20 @@ bash setup-terminal.sh
 | 이전 윈도우 | `Alt+[` |
 | 다음 윈도우 | `Alt+]` |
 
+### 세션 복원 (resurrect)
+
+| 기능 | 단축키 |
+|------|--------|
+| 세션 저장 | `Ctrl+B` → `Ctrl+S` |
+| 세션 복원 | `Ctrl+B` → `Ctrl+R` |
+
+continuum 플러그인이 15분마다 자동 저장하며, tmux 시작 시 마지막 상태를 자동 복원한다.
+
 ### 기타
 
 | 기능 | 단축키 |
 |------|--------|
 | 전체화면 | `Alt+Enter` |
-| PowerShell 탭 | `Alt+P` |
 | 복사 | `Ctrl+Shift+C` |
 | 붙여넣기 | `Ctrl+Shift+V` |
 
@@ -100,7 +109,7 @@ tmux kill-session -t 작업이름
 
 ### WSL 재부팅 시
 
-WSL을 재부팅(`wsl --shutdown`)하면 tmux 서버도 종료된다. 이 경우 세션이 사라지므로, 다음 터미널 열 때 새 `main` 세션이 자동 생성된다.
+WSL을 재부팅(`wsl --shutdown`)하거나 컴퓨터를 껐다 켜면 tmux 서버가 종료된다. tmux-resurrect/continuum 플러그인이 설치되어 있으므로, 다음 tmux 시작 시 창 레이아웃·패인 분할·작업 디렉토리가 자동 복원된다. 실행 중이던 프로세스는 복원되지 않는다.
 
 ### 알아두면 좋은 점
 
